@@ -4,5 +4,26 @@ body {
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #0073e6;
+}
+
+#question-container {
+    margin-top: 20px;
+}
+
+#options button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#options button:hover {
+    background-color: #0073e6;
+    color: white;
 }
