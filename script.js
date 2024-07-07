@@ -1,5 +1,5 @@
 function startGame() {
-    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('welcome-overlay').style.display = 'none';
     document.getElementById('question-container').style.display = 'block';
     document.body.style.filter = 'none';
 }
