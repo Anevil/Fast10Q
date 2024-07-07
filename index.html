@@ -33,12 +33,13 @@
         <div id="answer-container" style="display: none;">
             <h1 id="chatgpt-question">ChatGPT's Question</h1>
             <div class="answer-options">
-                <button class="answer-button">Option 1</button>
-                <button class="answer-button">Option 2</button>
-                <button class="answer-button">Option 3</button>
-                <button class="answer-button">Option 4</button>
+                <button class="answer-button" onclick="selectAnswer(0)">Option 1</button>
+                <button class="answer-button" onclick="selectAnswer(1)">Option 2</button>
+                <button class="answer-button" onclick="selectAnswer(2)">Option 3</button>
+                <button class="answer-button" onclick="selectAnswer(3)">Option 4</button>
             </div>
             <input type="text" id="custom-answer" placeholder="Enter your own answer">
+            <button id="submit-custom-answer-button" onclick="submitCustomAnswer()">Submit</button>
         </div>
     </div>
 
