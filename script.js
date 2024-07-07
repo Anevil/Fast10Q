@@ -1,52 +1,13 @@
-const questions = [
-    {
-        question: "What do you like to do in your free time?",
-        options: [
-            "Read books or articles",
-            "Spend time outdoors",
-            "Work with computers or technology",
-            "Engage in creative activities (drawing, music, crafts)",
-        ],
-    },
-    // Добавьте больше вопросов здесь
-];
-
-let currentQuestionIndex = 0;
-
-function showQuestion() {
-    const questionElement = document.getElementById("question");
-    const optionsElement = document.getElementById("options");
-
-    const currentQuestion = questions[currentQuestionIndex];
-
-    questionElement.textContent = currentQuestion.question;
-    optionsElement.innerHTML = "";
-
-    currentQuestion.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.onclick = () => handleAnswer(index);
-        optionsElement.appendChild(button);
-    });
+function startGame() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('question-container').style.display = 'block';
+    document.body.style.filter = 'none';
 }
 
-function handleAnswer(optionIndex) {
-    // Обработка ответа пользователя и переход к следующему вопросу
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
+function submitQuestion() {
+    document.getElementById('question-container').style.display = 'none';
+    document.getElementById('answer-container').style.display = 'block';
+    // Here you would send the user's question to the ChatGPT API and handle the response
 }
 
-function showResult() {
-    const questionElement = document.getElementById("question");
-    const optionsElement = document.getElementById("options");
-
-    questionElement.textContent = "Thank you for completing the quiz!";
-    optionsElement.innerHTML = "<p>Your results will be analyzed.</p>";
-}
-
-// Показать первый вопрос
-showQuestion();
+// Additional logic for handling ChatGPT responses and user answers will be added here
