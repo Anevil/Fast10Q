@@ -13,17 +13,33 @@ function submitQuestion() {
     console.log("Question submitted: " + userQuestion);
     document.getElementById('question-container').style.display = 'none';
     document.getElementById('answer-container').style.display = 'block';
-    showQuestion();
+    askChatGPT(userQuestion);
 }
 
-function showQuestion() {
+async function askChatGPT(message) {
+    try {
+        const response = await fetch('http://localhost:3000/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: message })
+        });
+
+        const data = await response.json();
+        console.log("ChatGPT response: " + data.reply);
+        showQuestion(data.reply);
+    } catch (error) {
+        console.error("Error occurred:", error);
+    }
+}
+
+function showQuestion(questionText) {
     const questions = [
-        "What do you like to do in your free time?",
-        "What is your favorite type of book?",
-        "How do you prefer to spend your weekends?",
+        questionText,
         // Add more questions as needed
     ];
-    
+
     const options = [
         ["Read books", "Spend time outdoors", "Work with technology", "Do creative activities"],
         ["Fiction", "Non-fiction", "Science", "Fantasy"],
