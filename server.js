@@ -1,7 +1,7 @@
 const express = require('express');
-const { OpenAIApi, Configuration } = require('openai');
+const OpenAI = require('openai');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config();  // Загрузка переменных среды из .env
 
 const app = express();
 const port = 3000;
@@ -9,10 +9,9 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message;
@@ -20,7 +19,7 @@ app.post('/api/chat', async (req, res) => {
   console.log("Received message:", userMessage); // Логирование входящего сообщения
 
   try {
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: userMessage }],
       temperature: 1,
@@ -30,10 +29,12 @@ app.post('/api/chat', async (req, res) => {
       presence_penalty: 0,
     });
 
-    console.log("OpenAI API response:", response.data); // Логирование ответа OpenAI API
+    console.log("OpenAI API response:", response); // Логирование ответа OpenAI API
+
+    const replyMessage = response.choices[0].message.content.trim();
 
     res.json({
-      reply: response.data.choices[0].message.content.trim()
+      reply: replyMessage
     });
   } catch (error) {
     console.error("Error occurred:", error.response ? error.response.data : error.message); // Логирование ошибки
